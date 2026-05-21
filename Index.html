@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Abrir Nubank</title>
+    <style>
+        .btn-nubank {
+            display: inline-block;
+            padding: 14px 28px;
+            background-color: #820ad1; /* Roxo do Nubank */
+            color: #ffffff;
+            text-decoration: none;
+            font-family: sans-serif;
+            font-weight: bold;
+            border-radius: 8px;
+            text-align: center;
+            cursor: pointer;
+            border: none;
+            font-size: 16px;
+        }
+        .btn-nubank:hover {
+            background-color: #6d08b1;
+        }
+    </style>
+</head>
+<body>
+
+    <!-- O Botão -->
+    <button class="btn-nubank" onclick="abrirNubank()">Abrir Aplicativo Nubank</button>
+
+    <script>
+        function abrirNubank() {
+            // 1. Tenta forçar a abertura pelo protocolo direto do app
+            window.location.href = "nubank://";
+
+            // 2. Cria um "timer" de segurança. 
+            // Se o app NÃO abrir em 2 segundos, significa que falhou (ou o usuário não tem o app).
+            // Aí o script redireciona para a página oficial ou lojas de aplicativos.
+            setTimeout(function() {
+                // Verifica se a página ainda está visível (se o app abrisse, a página ficaria em segundo plano)
+                if (!document.hidden) {
+                    // Redireciona para o site ou para a Play Store/App Store se preferir
+                    window.location.href = "https://nubank.com.br/";
+                }
+            }, 2000);
+        }
+    </script>
+
+</body>
+</html>
+
